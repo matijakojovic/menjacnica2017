@@ -81,22 +81,22 @@ public class GUIKontroler {
 	}
 
 	public static void prikaziDodajKursGUI() {
-		dodajKursGui = new DodajKursGUI(menjacnicaGui);
+		dodajKursGui = new DodajKursGUI();
 		dodajKursGui.setLocationRelativeTo(null);
 		dodajKursGui.setVisible(true);
 	}
 	
-	public static void unesiKurs() {
+	public static void unesiKurs(String naziv, String skraceniNaziv, Object sifra, String prodajni, String kupovni, String srednji) {
 		try {
 			Valuta valuta = new Valuta();
 
 			// Punjenje podataka o valuti
-			valuta.setNaziv(dodajKursGui.textFieldNaziv.getText());
-			valuta.setSkraceniNaziv(dodajKursGui.textFieldSkraceniNaziv.getText());
-			valuta.setSifra((Integer)(dodajKursGui.spinnerSifra.getValue()));
-			valuta.setProdajni(Double.parseDouble(dodajKursGui.textFieldProdajniKurs.getText()));
-			valuta.setKupovni(Double.parseDouble(dodajKursGui.textFieldKupovniKurs.getText()));
-			valuta.setSrednji(Double.parseDouble(dodajKursGui.textFieldSrednjiKurs.getText()));
+			valuta.setNaziv(naziv);
+			valuta.setSkraceniNaziv(skraceniNaziv);
+			valuta.setSifra((Integer)(sifra));
+			valuta.setProdajni(Double.parseDouble(prodajni));
+			valuta.setKupovni(Double.parseDouble(kupovni));
+			valuta.setSrednji(Double.parseDouble(srednji));
 			
 			// Dodavanje valute u kursnu listu
 			menjacnica.dodajValutu(valuta);
@@ -122,16 +122,16 @@ public class GUIKontroler {
 		
 		if (menjacnicaGui.table.getSelectedRow() != -1) {
 			MenjacnicaTableModel model = (MenjacnicaTableModel)(menjacnicaGui.table.getModel());
-			obrisiKursGui = new ObrisiKursGUI(menjacnicaGui,
-					model.vratiValutu(menjacnicaGui.table.getSelectedRow()));
+			obrisiKursGui = new ObrisiKursGUI(model.vratiValutu(menjacnicaGui.table.getSelectedRow()));
 			obrisiKursGui.setLocationRelativeTo(menjacnicaGui);
 			obrisiKursGui.setVisible(true);
 		}	
 	}
 
-	public static void obrisiValutu() {
+	public static void obrisiValutu(int sifra, String skraceniNaziv, String naziv, double kupovni, double srednji, double prodajni) {
+		Valuta v = new Valuta(sifra, skraceniNaziv, naziv, kupovni, srednji, prodajni);
 		try{
-			menjacnica.obrisiValutu(obrisiKursGui.getValuta());
+			menjacnica.obrisiValutu(v);
 			
 			prikaziSveValute();
 			obrisiKursGui.dispose();
@@ -144,17 +144,17 @@ public class GUIKontroler {
 	public static void prikaziIzvrsiZamenuGUI() {
 		if (menjacnicaGui.table.getSelectedRow() != -1) {
 			MenjacnicaTableModel model = (MenjacnicaTableModel)(menjacnicaGui.table.getModel());
-			izvrsiZamenuGui = new IzvrsiZamenuGUI(menjacnicaGui,
-					model.vratiValutu(menjacnicaGui.table.getSelectedRow()));
-			izvrsiZamenuGui.setLocationRelativeTo(menjacnicaGui);
+			izvrsiZamenuGui = new IzvrsiZamenuGUI(model.vratiValutu(menjacnicaGui.table.getSelectedRow()));
+			izvrsiZamenuGui.setLocationRelativeTo(null);
 			izvrsiZamenuGui.setVisible(true);
 		}
 	}
 	
-	public static void izvrsiZamenu(){
+	public static void izvrsiZamenu(int sifra, String skraceniNaziv, String naziv, double kupovni, double srednji, double prodajni){
 		try{
+			Valuta v = new Valuta(sifra, skraceniNaziv, naziv, kupovni, srednji, prodajni);
 			double konacniIznos = 
-					menjacnica.izvrsiTransakciju(izvrsiZamenuGui.getValuta(),
+					menjacnica.izvrsiTransakciju(v,
 							izvrsiZamenuGui.rdbtnProdaja.isSelected(), 
 							Double.parseDouble(izvrsiZamenuGui.textFieldIznos.getText()));
 		

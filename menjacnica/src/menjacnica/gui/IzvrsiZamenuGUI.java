@@ -46,7 +46,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IzvrsiZamenuGUI(MenjacnicaGUI glavniProzor, Valuta valuta) {
+	public IzvrsiZamenuGUI(Valuta valuta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IzvrsiZamenuGUI.class.getResource("/icons/Screenshot.png")));
 		setTitle("Izvrsi zamenu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -164,7 +164,8 @@ public class IzvrsiZamenuGUI extends JFrame {
 			btnIzvrsiZamenu = new JButton("Izracunaj iznos");
 			btnIzvrsiZamenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					GUIKontroler.izvrsiZamenu();
+					GUIKontroler.izvrsiZamenu(valuta.getSifra(), valuta.getSkraceniNaziv(), valuta.getNaziv(),
+							valuta.getKupovni(), valuta.getSrednji(), valuta.getProdajni());
 				}
 			});
 			btnIzvrsiZamenu.setBounds(24, 234, 160, 25);

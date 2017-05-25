@@ -47,10 +47,8 @@ public class ObrisiKursGUI extends JFrame {
 		this.valuta = valuta;
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public ObrisiKursGUI(MenjacnicaGUI glavniProzor, Valuta valuta) {
+	
+	public ObrisiKursGUI(Valuta valuta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ObrisiKursGUI.class.getResource("/icons/Screenshot.png")));
 		setResizable(false);
 		setTitle("Obrisi kurs");
@@ -178,7 +176,8 @@ public class ObrisiKursGUI extends JFrame {
 			btnDodaj = new JButton("Obrisi");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					GUIKontroler.obrisiValutu();
+					GUIKontroler.obrisiValutu(valuta.getSifra(), valuta.getSkraceniNaziv(), valuta.getNaziv(), 
+							valuta.getKupovni(), valuta.getSrednji(), valuta.getProdajni());
 				}
 			});
 			btnDodaj.setEnabled(false);

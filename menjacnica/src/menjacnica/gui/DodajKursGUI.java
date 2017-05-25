@@ -37,7 +37,7 @@ public class DodajKursGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DodajKursGUI(MenjacnicaGUI glavniProzor) {
+	public DodajKursGUI() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DodajKursGUI.class.getResource("/icons/Screenshot.png")));
 		setResizable(false);
 		setTitle("Dodaj kurs");
@@ -146,7 +146,8 @@ public class DodajKursGUI extends JFrame {
 			btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					GUIKontroler.unesiKurs();
+					GUIKontroler.unesiKurs(textFieldNaziv.getText(), textFieldSkraceniNaziv.getText(), spinnerSifra.getValue(),
+							textFieldProdajniKurs.getText(), textFieldKupovniKurs.getText(), textFieldSrednjiKurs.getText());
 				}
 			});
 		}

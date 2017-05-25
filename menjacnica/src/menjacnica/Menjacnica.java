@@ -24,7 +24,7 @@ public class Menjacnica implements MenjacnicaInterface{
 
 	@Override
 	public double izvrsiTransakciju(Valuta valuta, boolean prodaja, double iznos) {
-		return SOIzvrsiTransakciju.izvrsi(valuta, prodaja, iznos, kursnaLista);
+		return SOIzvrsiTransakciju.izvrsi(valuta, prodaja, iznos);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Menjacnica implements MenjacnicaInterface{
 
 	@Override
 	public void ucitajIzFajla(String putanja) {
-		SOUcitajIzFajla.izvrsi(putanja, kursnaLista);
+		kursnaLista = SOUcitajIzFajla.izvrsi(putanja, kursnaLista);
 	}
 
 	@Override
